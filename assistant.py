@@ -42,7 +42,8 @@ def listen_and_respond():
             command = recognizer.recognize_google(assistant).lower()
             print(f"You said: {command}")
             if "captain" in command:
-                return captain_at_your_service(recognizer,source)
+                extract_command = command.split("captain", 1)[1].strip()
+                return captain_at_your_service(recognizer,source,extract_command)
             else:
                 pass
         except sr.UnknownValueError:
@@ -57,17 +58,20 @@ def listen_and_respond():
     return True
 
 
-def captain_at_your_service(recognizer,source):
+def captain_at_your_service(recognizer,source,command=""):
     try:
         # Capture the audio input
-        speak("captain at your service")
-        audio = recognizer.listen(source, timeout=20, phrase_time_limit=20)
-        speak("Processing your input.")
-        
-        # Recognize the speech
-        command = recognizer.recognize_google(audio).lower()
-        print(f"You said: {command}")
-        conversation.append({"role": "user", "content": command})
+        if(command):
+            conversation.append({"role": "user", "content": command})
+        else:
+            speak("captain at your service")
+            audio = recognizer.listen(source, timeout=20, phrase_time_limit=20)
+            speak("Processing your input.")
+            
+            # Recognize the speech
+            command = recognizer.recognize_google(audio).lower()
+            print(f"You said: {command}")
+            conversation.append({"role": "user", "content": command})
 
         ai_response = client.chat.completions.create(
         model="gpt-35-turbo", # model = "deployment_name".
@@ -76,7 +80,7 @@ def captain_at_your_service(recognizer,source):
         response = ai_response.choices[0].message.content
 
     
-        if "I'm sorry" in response:
+        if "I'm sorry" in response or "I am sorry" in response:
             if "open youtube" in command or "captain open youtube" in command:
                 webbrowser.open("https://www.youtube.com")
                 response = "Opening YouTube for you."
