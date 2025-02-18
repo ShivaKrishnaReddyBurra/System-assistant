@@ -1,2 +1,5 @@
 vvv/
 test.py
+node_modules/
+out/
+.env

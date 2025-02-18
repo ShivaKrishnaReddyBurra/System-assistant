@@ -1,0 +1,26 @@
+
+> system-assistant@1.0.0 start
+> electron-forge start
+
+❯ Checking your system
+❯ Checking node version
+❯ Checking package manager version
+✔ Found npm@11.0.0
+✔ Found node@23.6.1
+✔ Checking your system
+[?25h❯ Locating application
+✔ Locating application
+❯ Loading configuration
+✔ Loading configuration
+❯ Preparing native dependencies
+✔ Preparing native dependencies
+❯ Running generateAssets hook
+✔ Running generateAssets hook
+❯ Running preStart hook
+✔ Running preStart hook
+[?25h
+Error: Traceback (most recent call last):
+  File "/home/shivakrishnareddyburra/Shiva/personal_projects/system-assistant/assistant.py", line 3, in <module>
+    import pywhatkit as kit
+ModuleNotFoundError: No module named 'pywhatkit'
+

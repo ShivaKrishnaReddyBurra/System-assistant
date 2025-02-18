@@ -1,0 +1,11 @@
+body{
+    height: 100vh;
+    background: linear-gradient(45deg, #A1C4FD, #C2E9FB);
+}
+.assistant__icon{
+    margin-top: 20vh;
+    height: 100px;
+    width: 100px;
+    background-color: transparent;
+    border: none;
+}

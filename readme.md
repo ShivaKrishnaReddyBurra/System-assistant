@@ -1,6 +1,6 @@
 # System Assistant
 
-This project is a voice-activated system assistant that can perform various tasks such as opening websites, playing music, fetching news, and more. The assistant uses speech recognition to understand user commands and responds accordingly.
+This project is a voice-activated system assistant that can perform various tasks such as opening websites, playing music, fetching news, and more. The assistant uses speech recognition to understand user commands and responds accordingly. Additionally, Electron.js is used to create a desktop application for the assistant.
 
 ## Features
 
@@ -9,6 +9,7 @@ This project is a voice-activated system assistant that can perform various task
 - **Play Music**: Play songs on YouTube by simply saying the song name.
 - **Fetch News**: Get the latest news headlines.
 - **Text-to-Speech**: The assistant can speak responses using Azure Cognitive Services.
+- **Desktop Application**: The assistant is available as a desktop application built with Electron.js.
 
 ## Requirements
 
@@ -19,6 +20,7 @@ This project is a voice-activated system assistant that can perform various task
 - `requests`
 - `azure-cognitiveservices-speech`
 - `openai`
+- `electron`
 
 ## Setup
 
@@ -41,9 +43,19 @@ This project is a voice-activated system assistant that can perform various task
     export SPEECH_REGION=<your_speech_region>
     ```
 
-4. Run the assistant:
+4. Install Electron.js dependencies:
+    ```sh
+    npm install
+    ```
+
+5. Run the assistant:
     ```sh
     python assistant.py
+    ```
+
+6. Start the Electron.js application:
+    ```sh
+    npm start
     ```
 
 ## Usage
@@ -73,3 +85,4 @@ This project is licensed under the MIT License.
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
 - [PyWhatKit](https://pypi.org/project/pywhatkit/)
 - [News API](https://newsapi.org/)
+- [Electron.js](https://www.electronjs.org/)
