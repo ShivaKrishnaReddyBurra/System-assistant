@@ -2,11 +2,34 @@ require("dotenv").config();
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { spawn } = require("child_process");
 const path = require("path");
+const fs = require("fs");
+
+// Import setup functions
+const { runSetup, pythonExecutable, unpackedScriptPath } = require("./setup");
 
 let mainWindow;
 let pythonProcess;
 
+// Ensure Python environment is set up before running the app
+(async () => {
+    await runSetup(); // Run setup before proceeding
+})();
+
+const scriptPath = unpackedScriptPath;
+console.log("App Directory:", path.dirname(pythonExecutable));
+console.log("Python Executable:", pythonExecutable);
+console.log("Python Script Path:", scriptPath);
+
+function ensurePythonEnv() {
+    if (!fs.existsSync(pythonExecutable)) {
+        console.error("❌ Python virtual environment is missing! Run `node setup.js` first.");
+        app.quit();
+    }
+}
+
 app.whenReady().then(() => {
+    ensurePythonEnv(); // Ensure the Python environment is available
+
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
@@ -19,30 +42,30 @@ app.whenReady().then(() => {
 
     mainWindow.loadFile("index.html");
 
-    // Handle app close
     mainWindow.on("closed", () => {
         if (pythonProcess) {
-            pythonProcess.kill(); // Terminate Python process
+            pythonProcess.kill();
         }
     });
 });
 
 ipcMain.on("start-voice-assistant", (event) => {
-    let pythonPath = process.env.PYTHON_PATH; // Path to Python executable
-    let scriptPath = path.join(__dirname, "assistant.py");
     if (!pythonProcess) {
-        pythonProcess = spawn(pythonPath, [scriptPath]);
+        console.log("🔊 Starting voice assistant...");
+        pythonProcess = spawn(pythonExecutable, [scriptPath]);
 
         pythonProcess.stdout.on("data", (data) => {
+            console.log(`📝 Assistant Output: ${data}`);
             mainWindow.webContents.send("assistant-response", data.toString());
         });
 
         pythonProcess.stderr.on("data", (data) => {
-            console.error(`Error: ${data}`);
+            console.error(`❌ Assistant Error: ${data}`);
         });
 
-        pythonProcess.on("close", () => {
-            pythonProcess = null; // Reset when process ends
+        pythonProcess.on("close", (code) => {
+            console.log(`🛑 Assistant Process Closed (Code: ${code})`);
+            pythonProcess = null;
         });
     }
 });

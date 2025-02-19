@@ -1,7 +1,7 @@
 {
   "name": "system-assistant",
   "version": "1.0.0",
-  "description": "System assistant that take voice commands to do the action",
+  "description": "System assistant that takes voice commands to perform actions",
   "homepage": "https://github.com/ShivaKrishnaReddyBurra/System-assistant#readme",
   "bugs": {
     "url": "https://github.com/ShivaKrishnaReddyBurra/System-assistant/issues"
@@ -15,10 +15,11 @@
   "type": "commonjs",
   "main": "main.js",
   "scripts": {
-    "start": "electron-forge start",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "electron-forge package",
-    "make": "cross-env $(cat .env | xargs) electron-forge make"
+    "setup": "node setup.js",
+    "start": "npm run setup && electron-forge start",
+    "package": "npm run setup && electron-forge package",
+    "make": "npm run setup && electron-forge make",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
