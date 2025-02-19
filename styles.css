@@ -1,3 +1,11 @@
+:root {
+    --dot-size: 1.25rem;
+    --max-block-size: calc(var(--dot-size) * 5);
+    --dot-color: lch(80.94% 62.75 148.82);
+    --dot-color-transition-1: lch(59.2% 85.33 318.2);
+    --dot-color-transition-2: lch(95.29% 85.33 97.41);
+    --delay: 0ms;
+  }
 body{
     height: 100vh;
     background: linear-gradient(45deg, #A1C4FD, #C2E9FB);
@@ -9,3 +17,54 @@ body{
     background-color: transparent;
     border: none;
 }
+
+.assistant__response{
+    max-height: 500px;
+    overflow-y: auto;
+    height: 50vh;
+    padding: 10px;
+    color: var(--dot-color);
+    animation: font-color-animation 5s infinite ease-in-out;
+    animation-delay: calc(var(--delay) * 1ms);
+}
+.loader {
+    margin-top: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--dot-size) / 2);
+    block-size: var(--max-block-size);
+  }
+  
+  .dot {
+    inline-size: var(--dot-size);
+    block-size: var(--dot-size);
+    border-radius: calc(var(--dot-size) / 2);
+    background: var(--dot-color);
+    animation: y-grow 2s infinite ease-in-out;
+    animation-delay: calc(var(--delay) * 1ms);
+  }
+  
+  @keyframes y-grow {
+    25% {
+      block-size: var(--max-block-size);
+      background-color: var(--dot-color-transition-1);
+    }
+    50% {
+      block-size: var(--dot-size);
+      background-color: var(--dot-color-transition-2);
+    }
+  }
+
+  @keyframes font-color-animation {
+    0% {
+      color: var(--dot-color);
+    }
+    25% {
+      color: var(--dot-color-transition-1);
+    }
+    50% {
+      color: var(--dot-color-transition-2);
+    }
+  }
+  

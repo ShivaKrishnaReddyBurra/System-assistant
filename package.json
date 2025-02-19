@@ -24,7 +24,8 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "jquery": "^3.7.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.7.0",
