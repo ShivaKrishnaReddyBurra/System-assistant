@@ -1,5 +1,0 @@
-pywhatkit
-speechrecognition
-pyaudio
-openai
-azure-cognitiveservices-speech

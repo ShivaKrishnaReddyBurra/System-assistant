@@ -66,6 +66,7 @@ ipcMain.on("start-voice-assistant", (event) => {
         pythonProcess.on("close", (code) => {
             console.log(`🛑 Assistant Process Closed (Code: ${code})`);
             pythonProcess = null;
+            app.quit();
         });
     }
 });

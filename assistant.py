@@ -21,16 +21,7 @@ speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, au
 def speak(text):
     """Speak the given text."""
     print(text, flush=True)
-    speech_synthesis_result = speech_synthesizer.speak_text_async(text).get()
-    if speech_synthesis_result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-        print("Speech synthesized for text [{}]".format(text), flush=True)
-    elif speech_synthesis_result.reason == speechsdk.ResultReason.Canceled:
-        cancellation_details = speech_synthesis_result.cancellation_details
-        print("Speech synthesis canceled: {}".format(cancellation_details.reason), flush=True)
-        if cancellation_details.reason == speechsdk.CancellationReason.Error:
-            if cancellation_details.error_details:
-                print("Error details: {}".format(cancellation_details.error_details), flush=True)
-                print("Did you set the speech resource key and region values?", flush=True)
+    speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config).speak_text_async(text).get()
 
 def listen_and_respond():
     """Listen to user input and respond accordingly."""
@@ -79,6 +70,11 @@ def captain_at_your_service(recognizer,source,command=""):
         )
         response = ai_response.choices[0].message.content
 
+
+        if "exit" in command or "quit" in command or "captain you can go now" in command or "take a leave" in command or "bye" in command:
+                response = "Goodbye! Have a great day."
+                speak(response)
+                return False  # Exit the program
     
         if "I'm sorry" in response or "I am sorry" in response or "I apologize":
 
@@ -106,10 +102,6 @@ def captain_at_your_service(recognizer,source,command=""):
 
             else:
                 response = "Sorry, I didn't understand that."
-        elif "exit" in command or "quit" in command or "captain you can go now" in command or "take a leave" in command or "bye" in command:
-                response = "Goodbye! Have a great day."
-                speak(response)
-                return False  
         speak(response)
     except sr.UnknownValueError:
         speak("Sorry, I didn't catch that. Could you please repeat?")

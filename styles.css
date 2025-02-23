@@ -8,14 +8,17 @@
   }
 body{
     height: 100vh;
-    background: linear-gradient(45deg, #A1C4FD, #C2E9FB);
+    background: #000;
 }
 .assistant__icon{
     margin-top: 20vh;
-    height: 100px;
-    width: 100px;
-    background-color: transparent;
     border: none;
+}
+.bi::before{
+    font-size: 5rem;
+    color: var(--dot-color);
+    animation: font-color-animation 5s infinite ease-in-out;
+    animation-delay: calc(var(--delay) * 1ms);  
 }
 
 .assistant__response{

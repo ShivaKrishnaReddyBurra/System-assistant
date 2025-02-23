@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "dotenv": "^16.4.7",
     "electron-squirrel-startup": "^1.0.1",
     "jquery": "^3.7.1"

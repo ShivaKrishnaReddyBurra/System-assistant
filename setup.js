@@ -2,7 +2,7 @@ const { spawnSync } = require("child_process");
 const path = require("path");
 const fs = require("fs");
 
-const appDir = path.join(process.env.HOME, ".system-assistant"); // App storage
+const appDir = path.join(process.env.HOME, "Shiva/personal_projects/system-assistant"); // App storage
 const venvDir = path.join(appDir, "venv"); // Virtual environment
 const pythonExecutable = path.join(venvDir, "bin", "python3"); // Python binary
 const scriptPath = path.join(__dirname, "assistant.py"); // Path to Python script
