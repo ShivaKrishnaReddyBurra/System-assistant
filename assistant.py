@@ -76,7 +76,7 @@ def captain_at_your_service(recognizer,source,command=""):
                 speak(response)
                 return False  # Exit the program
     
-        if "I'm sorry" in response or "I am sorry" in response or "I apologize":
+        if "sorry" in response or  "apologize" in response:
 
             if "open youtube" in command:
                 webbrowser.open("https://www.youtube.com")
